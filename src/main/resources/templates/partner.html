@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="menu">
+<head>
+    <meta charset="UTF-8">
+    <title>Partners List</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/5.3.2/css/bootstrap.min.css">
+
+
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="p-3">
+        <div class="card">
+            <div class="card-header">Partners List</div>
+            <form method="get" th:action="@{index}">
+                <input type="text" name="search" th:value="${searchName}">
+                <button class="btn btn-primary" type="submit">Search</button>
+
+            </form>
+
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Latitude</th>
+                        <th>Longitude</th>
+                        <th>Amount</th>
+                        <th>Weight</th>
+                        <th>Volume</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="s : ${pagePartner}">
+                        <td th:text="${s.partnerId}"></td>
+                        <td th:text="${s.partnerName}"></td>
+                        <td th:text="${s.latitude}"></td>
+                        <td th:text="${s.longitude}"></td>
+                        <td th:text="${s.amount}"></td>
+                        <td th:text="${s.weight}"></td>
+                        <td th:text="${s.volume}"></td>
+                        <td>
+                            <a class="btn btn-danger"
+                            th:href="@{delete(page=${currentPage}, size=${size}, search=${searchName}, id=${s.partnerId})}">Delete</a> |
+                            <a class="btn btn-outline-dark"
+                               th:href="@{edit(page=${currentPage}, size=${size}, search=${searchName}, id=${s.partnerId})}">Edit</a>
+                        </td>
+
+
+                    </tr>
+                    </tbody>
+
+
+
+
+                </table>
+                <div class="container">
+                    <ul class="nav nav-pills">
+                        <li class="nav-item me-2"
+                            th:each="p:${tabPages}" >
+                            <a th:text="${p+1}"
+                               th:class="${p==currentPage? 'btn btn-primary' : 'btn btn-outline-primary'}"
+                               th:href="@{index(page=${p}, size=${size}, search=${searchName})}"></a>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+
+</div>
+</body>
+</html>

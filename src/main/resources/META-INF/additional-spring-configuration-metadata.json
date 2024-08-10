@@ -1,0 +1,18 @@
+{
+  "properties": [
+    {
+      "name": "hibernate.show_sql",
+      "type": "java.lang.String",
+      "description": "Description for hibernate.show_sql."
+    },
+    {
+      "name": "hibernate.format_sql",
+      "type": "java.lang.String",
+      "description": "Description for hibernate.format_sql."
+    },
+    {
+      "name": "hibernate.generate_statistics",
+      "type": "java.lang.String",
+      "description": "Description for hibernate.generate_statistics."
+    }
+  ] }
