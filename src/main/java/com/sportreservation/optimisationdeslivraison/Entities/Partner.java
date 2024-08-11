@@ -1,5 +1,6 @@
 package com.sportreservation.optimisationdeslivraison.Entities;
 
+import com.sportreservation.optimisationdeslivraison.utilities.CustomIdGenerator;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
@@ -10,8 +11,6 @@ import org.hibernate.annotations.GenericGenerator;
 
 public class Partner {
     @Id
-    @GeneratedValue(generator = "11111111")
-    @GenericGenerator(name = "11111111", strategy = "org.hibernate.id.UUIDGenerator")
     @Column(name = "PartnerID", updatable = false, nullable = false)
     private String partnerId;
     @Column(name = "PartnerName")
@@ -22,4 +21,10 @@ public class Partner {
     private double weight;
     private  float volume;
 
+    @PrePersist
+    public void prePersist() {
+        if (this.partnerId == null || this.partnerId.isEmpty()) {
+            this.partnerId = CustomIdGenerator.generateIdp();
+        }
+    }
 }

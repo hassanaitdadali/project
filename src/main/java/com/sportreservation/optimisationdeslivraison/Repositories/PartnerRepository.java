@@ -13,20 +13,13 @@ public interface PartnerRepository extends JpaRepository<Partner, String> {
 
     List<Partner> findPartnerByPartnerId(String partnerId);
     List<Partner> findByPartnerIdContains(String searchName);
-    Page<Partner> findByPartnerIdContaining(String partnerId, PageRequest pageable);
+    Page<Partner> findByPartnerIdContaining(String searchName, PageRequest pageable);
 
 
 
     
 
 
-
-    /*@org.jetbrains.annotations.NotNull
-    @org.jetbrains.annotations.Contract(pure = true)
-    static List<Partner> findPartnerByLatitudeAfterAndLongitude() {
-        return findPartnerByLatitudeAfterAndLongitude();
-    }
-*/
 
 
 

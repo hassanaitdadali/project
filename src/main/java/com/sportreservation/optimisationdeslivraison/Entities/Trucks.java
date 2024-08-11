@@ -1,9 +1,7 @@
 package com.sportreservation.optimisationdeslivraison.Entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import com.sportreservation.optimisationdeslivraison.utilities.CustomIdGenerator;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,9 +11,13 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity
 public class Trucks {
     @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     @Column(name = "matricule", updatable = false, nullable = false)
     private String matricule;
     private Double capacite;
+    @PrePersist
+    public void prePersist() {
+        if (this.matricule == null || this.matricule.isEmpty()) {
+            this.matricule = CustomIdGenerator.generateId();
+        }
+    }
 }
